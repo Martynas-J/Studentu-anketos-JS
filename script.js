@@ -123,6 +123,7 @@ function studentsOutput(studentData) {
     let delButton = document.createElement("button")
     delButton.textContent = 'delete Student'
     delButton.addEventListener("click", () => {
+        localOldData = studentData
         studentItem.remove();
         localStudentsData = localStudentsData.filter(item => item.id !== localOldData.id)
         localStorage.setItem("localStudentsData", JSON.stringify(localStudentsData))
