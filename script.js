@@ -16,6 +16,7 @@ studentForm.score.addEventListener("input", () => {
 let oldData = null
 let localOldData
 let isSave = false
+// let id = Math.random()
 studentsDataOutput()
 function studentsDataOutput() {
     const studentsData = [
@@ -27,7 +28,8 @@ function studentsDataOutput() {
             email: "Jonas@mail.com",
             score: 3,
             group: "FEU 4",
-            languages: ["html", "css"]
+            languages: ["html", "css"],
+            id: Math.random()
         },
         {
             studentName: "Jon",
@@ -37,7 +39,8 @@ function studentsDataOutput() {
             email: "Jon@mail.com",
             score: 2,
             group: "FEU 5",
-            languages: ["css"]
+            languages: ["css"],
+            id: Math.random()
         },
         {
             studentName: "Rita",
@@ -47,7 +50,8 @@ function studentsDataOutput() {
             email: "Rita@mail.com",
             score: 3,
             group: "FEU 1",
-            languages: ["css", "php"]
+            languages: ["css", "php"],
+            id: Math.random()
         },
         {
             studentName: "Erika",
@@ -57,7 +61,8 @@ function studentsDataOutput() {
             email: "Erika@mail.com",
             score: 3,
             group: "FEU 2",
-            languages: ["html", "php"]
+            languages: ["html", "php"],
+            id: Math.random()
         },
         {
             studentName: "Edas",
@@ -67,7 +72,8 @@ function studentsDataOutput() {
             email: "Edas@mail.com",
             score: 5,
             group: "FEU 7",
-            languages: ["html", "php", "js"]
+            languages: ["html", "php", "js"],
+            id: Math.random()
         }
     ]
     if (!localStudentsData) {
@@ -120,7 +126,7 @@ function studentsOutput(studentData) {
         studentItem.remove();
 
         localStudentsData.map((item, index) => {
-            if (item === studentData) {
+            if (item.id === studentData.id) {
                 localStudentsData.splice(index, 1)
             }
         })
@@ -165,13 +171,12 @@ function studentsOutput(studentData) {
     } else {
         oldData.replaceWith(studentItem);
         localStudentsData.map((item, index) => {
-            if (item === localOldData) {
+            if (item.id === localOldData.id) {
                 localStudentsData[index] = studentData
             }
         })
         localStorage.setItem("localStudentsData", JSON.stringify(localStudentsData))
     }
-
 
 }
 function setValuesInInputs(studentData) {
@@ -184,7 +189,6 @@ function setValuesInInputs(studentData) {
     studentForm.phone.value = phone
     studentForm.email.value = email
     studentForm.group.value = group
-    console.log(studentForm.language)
     for (var i = 0; i < studentForm.language.length; i++) {
         if (languages.includes(studentForm.language[i].value)) {
             studentForm.language[i].checked = true;
@@ -207,6 +211,7 @@ studentForm.addEventListener("submit", (event) => {
     requiredField(getStudentData(form))
 })
 function getStudentData(element) {
+    let id = Math.random()
     let studentName = element.name.value
     let lastName = element.elements["last-name"].value;
     let age = element.age.value
@@ -230,6 +235,7 @@ function getStudentData(element) {
         score,
         group,
         languages,
+        id,
     }
     return studentData
 }
@@ -302,6 +308,7 @@ function requiredField(studentData) {
             isSave = false
             break;
         case (false):
+            // studentData.id = Math.random()
             studentsOutput(studentData);
             text = `Sukurtas studentas (${studentName} ${lastName})`
             localStudentsData.push(studentData)
