@@ -121,7 +121,7 @@ function studentsOutput(studentData) {
 
         localStudentsData.map((item, index) => {
             if (item === studentData) {
-                localStudentsData.splice(index,1)
+                localStudentsData.splice(index, 1)
             }
         })
         localStorage.setItem("localStudentsData", JSON.stringify(localStudentsData))
@@ -184,13 +184,12 @@ function setValuesInInputs(studentData) {
     studentForm.phone.value = phone
     studentForm.email.value = email
     studentForm.group.value = group
-
-    for (var i = 0; i < languageByName.length; i++) {
-        for (var j = 0; j < languageByName.length; j++) {
-            if (languageByName[i].value === languages[j]) {
-                languageByName[i].checked = true;
-            }
+    console.log(studentForm.language)
+    for (var i = 0; i < studentForm.language.length; i++) {
+        if (languages.includes(studentForm.language[i].value)) {
+            studentForm.language[i].checked = true;
         }
+
     }
 }
 function createdStudentText(text, color) {
