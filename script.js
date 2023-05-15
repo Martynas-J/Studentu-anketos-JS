@@ -1,13 +1,6 @@
 const studentForm = document.querySelector("#student-form");
 let studentsList = document.querySelector("#student-list");
 
-let nameById = document.getElementById("name")
-let lastNameById = document.getElementById("last-name")
-let ageById = document.getElementById("age")
-let phoneById = document.getElementById("phone")
-let emailById = document.getElementById("email")
-let scoreById = document.getElementById("score")
-let groupByName = document.getElementsByName("group")
 let languageByName = document.getElementsByName("language")
 let submitButton = document.querySelector(".submit")
 let itLevelNum = document.createElement("label")
