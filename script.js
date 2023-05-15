@@ -124,12 +124,7 @@ function studentsOutput(studentData) {
     delButton.textContent = 'delete Student'
     delButton.addEventListener("click", () => {
         studentItem.remove();
-
-        localStudentsData.map((item, index) => {
-            if (item.id === studentData.id) {
-                localStudentsData.splice(index, 1)
-            }
-        })
+        localStudentsData = localStudentsData.filter(item => item.id !== localOldData.id)
         localStorage.setItem("localStudentsData", JSON.stringify(localStudentsData))
 
         let text = `Istrintas studentas (${studentName} ${lastName})`
@@ -170,11 +165,8 @@ function studentsOutput(studentData) {
 
     } else {
         oldData.replaceWith(studentItem);
-        localStudentsData.map((item, index) => {
-            if (item.id === localOldData.id) {
-                localStudentsData[index] = studentData
-            }
-        })
+        let index = localStudentsData.findIndex(item => item.id === localOldData.id)
+        localStudentsData[index] = studentData
         localStorage.setItem("localStudentsData", JSON.stringify(localStudentsData))
     }
 
