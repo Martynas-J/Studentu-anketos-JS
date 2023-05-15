@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        label {
+            display: block;
+        }
+
+        fieldset {
+            width: 100px;
+        }
+
+        fieldset label {
+            display: inline;
+        }
+
+        .checkbox {
+            width: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="student-form" novalidate>
+        <div class="form-control">
+            <label for="name">Name:*</label>
+            <input type="text" name="name" id="name" class="required form-control" required >
+        </div>
+        <div class="form-control">
+            <label for="last-name">Last name:*</label>
+            <input type="text" name="last-name" id="last-name" class="required form-control" >
+        </div>
+        <div class="form-control">
+            <label for="age">Age:*</label>
+            <input type="number" name="age" id="age" class="required form-control" >
+        </div>
+        <div class="form-control">
+            <label for="phone">Phone number:</label>
+            <input type="tel" name="phone" id="phone" class="required form-control" >
+        </div>
+        <div class="form-control">
+            <label for="email">Email:*</label>
+            <input type="text" name="email" id="email" class="required form-control" >
+        </div>
+        <div class="form-control">
+            <label for="score">IT level</label>
+            <input type="range" min="1" max="10" value="1" name="score" id="score" class="form-label">
+        </div>
+        <div class="form-control">
+            <fieldset>
+                <legend>Choose Group</legend>
+                <label for="grup-1">FEU 1gr.</label>
+                <input type="radio" name="group" value="FEU 1" id="grup-1" checked>
+                <label for="grup-2">FEU 2gr.</label>
+                <input type="radio" name="group" value="FEU 2" id="grup-2">
+                <label for="grup-3">FEU 3gr.</label>
+                <input type="radio" name="group" value="FEU 3" id="grup-3">
+                <label for="grup-4">FEU 4gr.</label>
+                <input type="radio" name="group" value="FEU 4" id="grup-4">
+                <label for="grup-5">FEU 5gr.</label>
+                <input type="radio" name="group" value="FEU 5" id="grup-5">
+                <label for="grup-6">FEU 6gr.</label>
+                <input type="radio" name="group" value="FEU 6" id="grup-6">
+                <label for="grup-7">FEU 7gr.</label>
+                <input type="radio" name="group" value="FEU 7" id="grup-7">
+            </fieldset>
+        </div>
+        <div class="form-control">
+            <fieldset class="checkbox">
+                <legend>Choose programming language</legend>
+                <label for="html">HTML</label>
+                <input type="checkbox" value="html" name="language" id="html">
+                <label for="css">Css</label>
+                <input type="checkbox" value="css" name="language" id="css">
+                <label for="js">Java script</label>
+                <input type="checkbox" value="js" name="language" id="js">
+                <label for="php">Php</label>
+                <input type="checkbox" value="php" name="language" id="php">
+                <label for="python">Python</label>
+                <input type="checkbox" value="python" name="language" id="python">
+            </fieldset>
+        </div>
+        <div class="form-control">
+            <input class="submit btn btn-outline-primary" type="submit" value="Submit">
+        </div>
+    </form>
+    <div id="student-list">
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
+<!-- PIRMA DALIS:
+Sukurti kontaktų formą.
+1. Kontaktų formoje turi būti šie laukeliai:
+    1. Tekstinis laukelis vardui (privalomas).
+    2. Tekstinis laukelis pavardei (privalomas).
+    3. Skaičiaus laukelis amžiui (privalomas).
+    4. Laukelis įvesti telefono numerį (neprivalomas).
+    5. Laukelis įvesti el. paštą (privalomas).
+    6. Range tipo laukelis, kuris skirtas įvertinti savo IT žinias nuo 1 iki 10. Galimas vertinimas tik sveikiems skaičiams.
+    7. Radio tipo laukeliai, kuriuose pasirenkamas grupės numeris. Turi būti galimybė pasirinkti grupes nuo FEU 1gr. iki FEU 7gr.
+    8. Šalia kiekvieno įvesties (input) elemento, pridėti label elementą, kuris žymi laukelio pavadinimą. -->
