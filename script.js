@@ -1,4 +1,5 @@
 const studentForm = document.querySelector("#student-form");
+const studentSearchForm = document.querySelector("#search");
 let studentsList = document.querySelector("#student-list");
 
 let languageByName = document.getElementsByName("language")
@@ -16,7 +17,6 @@ studentForm.score.addEventListener("input", () => {
 let oldData = null
 let localOldData
 let isSave = false
-// let id = Math.random()
 studentsDataOutput()
 function studentsDataOutput() {
     const studentsData = [
@@ -88,19 +88,19 @@ localStudentsData.map(item => {
 function studentsOutput(studentData) {
     let { studentName, lastName, age, phone, email, score, group, languages } = studentData;
     let studentNameAndText = document.createElement("p")
-    studentNameAndText.innerHTML = "Student name: " + studentName
+    studentNameAndText.innerHTML = `Student name: <span class="name">${studentName}</span>`
     let lastNameAndText = document.createElement("p")
-    lastNameAndText.innerHTML = "Last name: " + lastName
+    lastNameAndText.innerHTML = `Last name: " <span class="surname">${lastName}</span>`
     let ageAndText = document.createElement("p")
-    ageAndText.innerHTML = "Age: " + age
+    ageAndText.innerHTML = `Age: " <span Class="age">${age}</span>`
     let phoneAndText = document.createElement("p")
-    phoneAndText.innerHTML = "Phone: **********"
+    phoneAndText.innerHTML = "Phone: <span>**********<span>"
     let emailAndText = document.createElement("p")
-    emailAndText.innerHTML = "Email: **********"
+    emailAndText.innerHTML = "Email: <span>**********<span>"
     let scoreAndText = document.createElement("p")
-    scoreAndText.innerHTML = "IT level: " + score
+    scoreAndText.innerHTML = `IT level: " <span Class="score">${score}</span>`
     let groupAndText = document.createElement("p")
-    groupAndText.innerHTML = "Group: " + group
+    groupAndText.innerHTML = `Group: " <span Class="group">${group}</span>`
 
 
     let studentItem = document.createElement("div")
@@ -111,12 +111,12 @@ function studentsOutput(studentData) {
     privateInfoButton.addEventListener("click", () => {
         if (!isShown) {
             privateInfoButton.textContent = "hide secrets"
-            phoneAndText.textContent = "Phone: " + phone
-            emailAndText.textContent = "Email: " + email
+            phoneAndText.textContent = `Phone: " <span>${phone}</span>`
+            emailAndText.textContent = `Email: " <span>${email}</span>`
         } else {
             privateInfoButton.textContent = "show secrets"
-            phoneAndText.textContent = "Phone: **********"
-            emailAndText.textContent = "Email: **********"
+            phoneAndText.textContent = "Phone: <span>**********</span>"
+            emailAndText.textContent = "Email: <span>**********</span>"
         }
         isShown = !isShown
     })
@@ -127,7 +127,6 @@ function studentsOutput(studentData) {
         studentItem.remove();
         localStudentsData = localStudentsData.filter(item => item.id !== localOldData.id)
         localStorage.setItem("localStudentsData", JSON.stringify(localStudentsData))
-
         let text = `Istrintas studentas (${studentName} ${lastName})`
         createdStudentText(text, "red")
     })
@@ -157,6 +156,7 @@ function studentsOutput(studentData) {
     ulElement.textContent = "Programming languages"
     languages.map(item => {
         let liElement = document.createElement("li")
+        liElement.classList.add("language")
         liElement.textContent += item
         ulElement.append(liElement)
     })
@@ -242,7 +242,6 @@ if (savedFormData) {
     setValuesInInputs(savedFormValues)
 }
 
-
 function requiredField(studentData) {
     let { studentName, lastName, age, phone, email } = studentData;
     let requiredField = document.getElementsByClassName("required")
@@ -301,7 +300,6 @@ function requiredField(studentData) {
             isSave = false
             break;
         case (false):
-            // studentData.id = Math.random()
             studentsOutput(studentData);
             text = `Sukurtas studentas (${studentName} ${lastName})`
             localStudentsData.push(studentData)
@@ -312,7 +310,53 @@ function requiredField(studentData) {
     localStorage.removeItem("savedFormData");
     itLevelNum.textContent = studentForm.score.value
 }
+studentSearchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    form = event.target
+    let studentsItems = studentsList.querySelectorAll(".student-item");
+    let searchValue = form.choice.value
+    let text = form.text.value
+    text = text.toLowerCase()
 
+    studentsItems.forEach(studentItem => {
+        if (searchValue === "language") {
+            let ulElement = studentItem.querySelectorAll("ul")
+            ulElement.forEach(item => {
+                let searchStudentItem = item.querySelectorAll(`.${searchValue}`)
+                let orIsLanguage = false
+                searchStudentItem.forEach(item => {
+                    let languageValue = item.textContent.toLowerCase()
+                    if (languageValue.includes(text)) {
+                        orIsLanguage = true
+                    }
+                })
+                if (orIsLanguage) {
+                    studentItem.style.display = "block"
+                } else {
+                    studentItem.style.display = "none"
+                }
+            })
+        } else {
+            let searchStudentItem = studentItem.querySelector(`.${searchValue}`);
+            let searchStudentItemValue = searchStudentItem.textContent.toLowerCase()
+            if (searchStudentItemValue.includes(text)) {
+                studentItem.style.display = "block"
+            } else {
+                studentItem.style.display = "none"
+            }
+        }
+
+    })
+})
+
+// 3. Prie formos pridėti select elementą ir jame sukurti sąrašą (option elementus), kuriuose būtų nurodytą pagal kurią informaciją studento yra ieškoma (vardas, pavardė, grupė ir t.t., bet išskyrus telefono numerį ir elektroninį paštą).
+// 4. Patobulinti formą, kad studento būtų ieškoma ne tik pagal vardą ir pavardę, tačiau ir pagal pasirinktą atributą.
+
+// DEVINTA UŽDUOTIS (filtravimas):
+// 1. HTML faile sukurti naują form'ą. Joje pridėti šiuos input elementus: text ir submit.
+// 2. Formos submit event'o metu, gauti įvestą tekstą ir:
+// 2.1. Patikrinti ar studentų sąraše yra studentas, kurio varde arba pavardėje yra įvestas tekstas.
+// 2.2. Ekrane atvaizduoti tik tuos studentus, kurie tenkina sąlygą.
 
 // DEŠIMTA UŽDUOTIS:
 // 1. Studento kūrimo ir redagavimo metu reikia sukurti visų studentų masyvą (tokiu pačiu formatu kaip ir initialData).
