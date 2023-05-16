@@ -31,23 +31,23 @@
     <form id="student-form" novalidate>
         <div class="form-control">
             <label for="name">Name:*</label>
-            <input type="text" name="name" id="name" class="required form-control" required >
+            <input type="text" name="name" id="name" class="required form-control" required>
         </div>
         <div class="form-control">
             <label for="last-name">Last name:*</label>
-            <input type="text" name="last-name" id="last-name" class="required form-control" >
+            <input type="text" name="last-name" id="last-name" class="required form-control">
         </div>
         <div class="form-control">
             <label for="age">Age:*</label>
-            <input type="number" name="age" id="age" class="required form-control" >
+            <input type="number" name="age" id="age" class="required form-control">
         </div>
         <div class="form-control">
             <label for="phone">Phone number:</label>
-            <input type="tel" name="phone" id="phone" class="required form-control" >
+            <input type="tel" name="phone" id="phone" class="required form-control">
         </div>
         <div class="form-control">
             <label for="email">Email:*</label>
-            <input type="text" name="email" id="email" class="required form-control" >
+            <input type="text" name="email" id="email" class="required form-control">
         </div>
         <div class="form-control">
             <label for="score">IT level</label>
@@ -90,6 +90,19 @@
         <div class="form-control">
             <input class="submit btn btn-outline-primary" type="submit" value="Submit">
         </div>
+    </form>
+    <form id="search">
+        <label style="font-size: 18px;" for="text"> <b>Search student by: </b></label>
+        <input type="text" name="text" id="text">
+        <select name="choice" id="choice" onchange="choice">
+            <option value="name">Name</option>
+            <option value="surname">Surname</option>
+            <option value="age">Age</option>
+            <option value="score">IT level</option>
+            <option value="group">Group</option>
+            <option value="language">Prog. lang.</option>
+        </select>
+        <input type="submit" value="search">
     </form>
     <div id="student-list">
     </div>
