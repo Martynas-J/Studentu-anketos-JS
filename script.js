@@ -90,17 +90,17 @@ function studentsOutput(studentData) {
     let studentNameAndText = document.createElement("p")
     studentNameAndText.innerHTML = `Student name: <span class="name">${studentName}</span>`
     let lastNameAndText = document.createElement("p")
-    lastNameAndText.innerHTML = `Last name: " <span class="surname">${lastName}</span>`
+    lastNameAndText.innerHTML = `Last name: <span class="surname">${lastName}</span>`
     let ageAndText = document.createElement("p")
-    ageAndText.innerHTML = `Age: " <span Class="age">${age}</span>`
+    ageAndText.innerHTML = `Age: <span Class="age">${age}</span>`
     let phoneAndText = document.createElement("p")
     phoneAndText.innerHTML = "Phone: <span>**********<span>"
     let emailAndText = document.createElement("p")
     emailAndText.innerHTML = "Email: <span>**********<span>"
     let scoreAndText = document.createElement("p")
-    scoreAndText.innerHTML = `IT level: " <span Class="score">${score}</span>`
+    scoreAndText.innerHTML = `IT level: <span Class="score">${score}</span>`
     let groupAndText = document.createElement("p")
-    groupAndText.innerHTML = `Group: " <span Class="group">${group}</span>`
+    groupAndText.innerHTML = `Group: <span Class="group">${group}</span>`
 
 
     let studentItem = document.createElement("div")
@@ -111,12 +111,12 @@ function studentsOutput(studentData) {
     privateInfoButton.addEventListener("click", () => {
         if (!isShown) {
             privateInfoButton.textContent = "hide secrets"
-            phoneAndText.textContent = `Phone: " <span>${phone}</span>`
-            emailAndText.textContent = `Email: " <span>${email}</span>`
+            phoneAndText.innerHTML = `Phone: <span Class="phone">${phone}</span>`
+            emailAndText.innerHTML = `Email: <span Class="email">${email}</span>`
         } else {
             privateInfoButton.textContent = "show secrets"
-            phoneAndText.textContent = "Phone: <span>**********</span>"
-            emailAndText.textContent = "Email: <span>**********</span>"
+            phoneAndText.innerHTML = "Phone: <span>**********</span>"
+            emailAndText.innerHTML = "Email: <span>**********</span>"
         }
         isShown = !isShown
     })
@@ -318,7 +318,9 @@ studentSearchForm.addEventListener("submit", (event) => {
     let text = form.text.value
     text = text.toLowerCase()
 
-    studentsItems.forEach(studentItem => {
+
+
+    studentsItems.forEach((studentItem, index) => {
         if (searchValue === "language") {
             let ulElement = studentItem.querySelectorAll("ul")
             ulElement.forEach(item => {
@@ -336,6 +338,15 @@ studentSearchForm.addEventListener("submit", (event) => {
                     studentItem.style.display = "none"
                 }
             })
+        } else if (searchValue === "age") {
+            let searchStudentItem = studentItem.querySelector(`.${searchValue}`);
+            if (searchStudentItem.textContent === text) {
+                studentItem.style.display = "block"
+            } else {
+                studentItem.style.display = "none"
+            }
+        } else if (searchValue === "phone") {
+
         } else {
             let searchStudentItem = studentItem.querySelector(`.${searchValue}`);
             let searchStudentItemValue = searchStudentItem.textContent.toLowerCase()
